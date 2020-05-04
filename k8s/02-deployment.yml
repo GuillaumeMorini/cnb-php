@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: cnb-php
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnb-php
+  template:
+    metadata:
+      labels:
+        app: cnb-php
+    spec:
+      containers:
+        - image: alexandreroman/cnb-php
+          name: app
+          resources:
+            limits:
+              memory: 256Mi
+          env:
+          - name: PORT
+            value: "8080"
+          #- name: APP_TITLE
+          #  value: "Uncomment to set a custom title"
+          #- name: APP_MESSAGE
+          #  value: "Uncomment to set a custom message"
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /
+            initialDelaySeconds: 20
+            periodSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /
+            initialDelaySeconds: 10
