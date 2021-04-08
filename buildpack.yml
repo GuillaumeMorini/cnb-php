@@ -1,7 +1,7 @@
 php:
   # this allows you to specify a version constraint for the `php` dependency
   # any valid semver constaints (e.g. 7.*) are also acceptable
-  version: 7.2.*
+  version: 7.*
 
   # text user can specify to use PHP's built-in Web Server
   # default: php-server
